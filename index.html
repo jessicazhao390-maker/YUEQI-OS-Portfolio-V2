@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080D1B">
+  <meta name="description" content="Yueqi Zhao's personal engineering workstation — Electrical and Electronic Engineering at UNNC.">
+  <title>YUEQI.OS — Personal Engineering Workstation</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <section class="boot" id="boot" aria-label="Workspace introduction" hidden>
+    <div class="boot-content">
+      <span class="boot-mark" aria-hidden="true">Y<span>_</span></span>
+      <h1>YUEQI.OS</h1>
+      <p>PERSONAL ENGINEERING WORKSTATION</p>
+      <div class="boot-track" aria-hidden="true"><span></span></div>
+      <p class="initializing" role="status">INITIALIZING WORKSPACE...</p>
+      <button id="skip-intro" class="text-button" type="button">Skip Intro <span aria-hidden="true">→</span></button>
+    </div>
+  </section>
+
+  <div class="desktop" id="desktop">
+    <header class="system-bar">
+      <a class="brand" href="./index.html" aria-label="YUEQI.OS home"><span class="brand-symbol" aria-hidden="true">⌘</span> YUEQI<span>.OS</span></a>
+      <div class="system-status"><span class="workstation-label">ENGINEERING WORKSTATION</span><span class="online"><i aria-hidden="true"></i> ONLINE</span></div>
+    </header>
+
+    <div class="wallpaper" aria-hidden="true">
+      <div class="radar"><span></span></div>
+      <svg class="signal" viewBox="0 0 1000 180" preserveAspectRatio="none"><path d="M0 90H160l15-10 18 20 16-10h100l14-25 16 50 18-90 20 130 20-90 16 25h130l16-10 16 20 16-10H1000"/></svg>
+      <span class="coordinate coordinate-top">X / 000 &nbsp; Y / 000</span><span class="coordinate coordinate-bottom">PERSONAL WORKSPACE / EEE</span>
+    </div>
+
+    <main class="workspace">
+      <nav class="applications" aria-label="Desktop applications">
+        <button class="app-icon" data-app="about" type="button"><span class="icon-tile"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-3a7 7 0 0 1 14 0v3M8 21h8"/></svg></span><span>About Me</span></button>
+        <button class="app-icon" data-app="projects" type="button"><span class="icon-tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V4h7l3 3h8v13H3zM3 10h18"/></svg></span><span>Project Explorer</span></button>
+        <button class="app-icon" data-app="skills" type="button"><span class="icon-tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16"/></svg></span><span>Tech Stack</span></button>
+        <button class="app-icon" data-app="education" type="button"><span class="icon-tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m2 8 10-5 10 5-10 5zM6 10v7q6 5 12 0v-7m4-2v9"/></svg></span><span>Education</span></button>
+        <button class="app-icon" data-app="contact" type="button"><span class="icon-tile"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></span><span>Contact</span></button>
+      </nav>
+
+      <section class="introduction" aria-labelledby="greeting">
+        <p class="eyebrow"><span aria-hidden="true"></span> WELCOME TO MY WORKSPACE</p>
+        <h1 id="greeting">YUEQI <span>ZHAO</span><span class="name-period">.</span></h1>
+        <p class="discipline">Electrical &amp; Electronic Engineering</p>
+        <p class="university">University of Nottingham Ningbo China</p>
+        <div class="intro-rule" aria-hidden="true"></div>
+        <p class="subtitle">Explore my engineering journey.</p>
+        <p class="desktop-hint"><span aria-hidden="true">↖</span> Select an application to get started</p>
+      </section>
+
+      <div class="window-layer" id="window-layer" aria-label="Open applications"></div>
+    </main>
+
+    <footer class="taskbar" aria-label="Application taskbar">
+      <button class="desktop-button" id="show-desktop" type="button" aria-label="Show desktop">▦ <span>Desktop</span></button>
+      <div class="taskbar-apps" id="taskbar-apps" aria-label="Open application controls"></div>
+      <span class="phase-label">WORKSPACE / 03</span>
+    </footer>
+    <p class="sr-only" id="window-status" role="status"></p>
+  </div>
+  <template id="window-template">
+    <section class="app-window" role="dialog" aria-modal="false" tabindex="-1">
+      <header class="window-header">
+        <div class="window-caption"><span class="window-indicator" aria-hidden="true"></span><h2 class="window-title"></h2></div>
+        <div class="window-controls">
+          <button class="window-control minimize-button" type="button" aria-label="Minimize application" title="Minimize">−</button>
+          <button class="window-control maximize-button" type="button" aria-label="Maximize application" title="Maximize">□</button>
+          <button class="window-control close-button" type="button" aria-label="Close application" title="Close">×</button>
+        </div>
+      </header>
+      <div class="window-body"></div>
+      <footer class="window-footer"><span>YUEQI.OS</span><span>PERSONAL ENGINEERING WORKSTATION</span></footer>
+    </section>
+  </template>
+  <template id="about-content">
+    <article class="about-profile" aria-labelledby="about-name">
+      <header class="about-identity">
+        <p class="about-system-label"><span aria-hidden="true"></span> PERSONAL PROFILE / EEE</p>
+        <h3 id="about-name">Yueqi <span>Zhao</span></h3>
+        <p class="about-discipline">Electrical &amp; Electronic Engineering</p>
+      </header>
+
+      <section class="about-intro" aria-labelledby="about-profile-heading">
+        <h4 id="about-profile-heading"><span aria-hidden="true">01 /</span> Profile</h4>
+        <p>I am an Electrical and Electronic Engineering student interested in combining hardware, software and intelligent technologies to develop practical engineering systems.</p>
+      </section>
+
+      <section class="about-card about-academic" aria-labelledby="about-academic-heading">
+        <h4 id="about-academic-heading"><span aria-hidden="true">02 /</span> Academic Background</h4>
+        <dl class="about-facts">
+          <div><dt>University</dt><dd>University of Nottingham Ningbo China</dd></div>
+          <div><dt>Degree</dt><dd>BEng (Hons) Electrical and Electronic Engineering</dd></div>
+          <div><dt>Study period</dt><dd>September 2023 – June 2027</dd></div>
+        </dl>
+      </section>
+
+      <div class="about-detail-grid">
+        <section class="about-card" aria-labelledby="about-interests-heading">
+          <h4 id="about-interests-heading"><span aria-hidden="true">03 /</span> Areas of Interest</h4>
+          <ul class="about-interests">
+            <li>Computer Vision</li>
+            <li>Machine Learning</li>
+            <li>Embedded Systems</li>
+            <li>Internet of Things (IoT)</li>
+            <li>Robotics and Control</li>
+            <li>Signal Processing</li>
+          </ul>
+        </section>
+        <section class="about-card" aria-labelledby="about-experience-heading">
+          <h4 id="about-experience-heading"><span aria-hidden="true">04 /</span> Engineering Experience</h4>
+          <p class="about-experience-intro">My portfolio spans:</p>
+          <ul class="about-experience">
+            <li>Autonomous robotic systems</li>
+            <li>Radar signal processing</li>
+            <li>Power electronics</li>
+            <li>IoT-based monitoring and data visualisation</li>
+          </ul>
+        </section>
+      </div>
+    </article>
+  </template>
+  <template id="projects-content">
+    <div class="project-explorer">
+      <nav class="project-directory" aria-label="Project directory">
+        <p class="section-label">PROJECT DIRECTORY / 05</p>
+        <button type="button" data-project="0" aria-controls="project-detail">Vision-Guided Autonomous Robotic Vehicle</button>
+        <button type="button" data-project="1" aria-controls="project-detail">X-Band Doppler Radar Speed Detection System</button>
+        <button type="button" data-project="2" aria-controls="project-detail">Closed-Loop Two-Switch Forward Converter</button>
+        <button type="button" data-project="3" aria-controls="project-detail">Find-Nomi — Smart Tracking &amp; Visualisation</button>
+        <button type="button" data-project="4" aria-controls="project-detail">MediSentinel — Pharmaceutical Shipment Monitoring</button>
+      </nav>
+      <section class="project-detail" id="project-detail" aria-labelledby="project-name" tabindex="0">
+        <figure class="project-visual">
+          <div class="project-image-frame">
+            <img id="project-image" src="./assets/images/robotic-vehicle.webp" alt="Vision-Guided Autonomous Robotic Vehicle — concept illustration" width="1672" height="941" decoding="async">
+          </div>
+          <figcaption>PROJECT CONCEPT IMAGE / NOT A PROJECT PHOTO</figcaption>
+        </figure>
+        <p class="section-label" id="project-category"></p>
+        <h3 id="project-name"></h3>
+        <p class="date-range" id="project-period" hidden></p>
+        <h4>OVERVIEW</h4><p id="project-overview"></p>
+        <h4 id="contributions-label">MY CONTRIBUTIONS</h4><ul class="contributions" id="project-contributions"></ul>
+        <h4>TECHNOLOGIES</h4><ul class="tag-list" id="project-technologies" aria-label="Project technologies"></ul>
+        <h4>OUTCOME / STATUS</h4><p id="project-outcome"></p>
+      </section>
+    </div>
+    <p class="sr-only" id="project-announcement" role="status"></p>
+  </template>
+  <template id="skills-content">
+    <div class="skills-dashboard">
+      <header class="skills-dashboard-header">
+        <p class="section-label">CAPABILITY DIRECTORY / ENGINEERING</p>
+        <h3>Tech Stack</h3>
+        <p>Hardware, software and control technologies across my engineering work.</p>
+      </header>
+      <div class="skills-toolbar">
+        <label for="skill-search">SEARCH TECHNOLOGIES</label>
+        <div class="skills-search-control">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg>
+          <input id="skill-search" type="search" placeholder="OpenCV, STM32, MQTT…" autocomplete="off" spellcheck="false" aria-controls="skill-groups" aria-describedby="skills-search-hint">
+          <button id="clear-skill-search" type="button" hidden>Clear</button>
+        </div>
+        <p id="skills-search-hint">Cyan technologies have documented project links. Select one to explore its applications.</p>
+        <p id="skills-search-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </div>
+      <div class="skills-empty-state" id="skills-empty-state" hidden>
+        <h4>No matching technology</h4>
+        <p>Try another technology name or clear the search to browse all categories.</p>
+      </div>
+      <div class="skills-category-grid" id="skill-groups"></div>
+    </div>
+  </template>
+  <template id="education-content">
+    <article class="education-record" aria-labelledby="education-record-title">
+      <header class="education-record-header">
+        <p class="section-label">ACADEMIC RECORDS / UNDERGRADUATE</p>
+        <h3 id="education-record-title">Academic Records</h3>
+      </header>
+
+      <section class="education-card education-profile" aria-labelledby="education-profile-heading">
+        <h4 id="education-profile-heading"><span aria-hidden="true">01 /</span> Academic Profile</h4>
+        <h5>University of Nottingham Ningbo China <span>(UNNC)</span></h5>
+        <p class="education-location"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg> Ningbo, China</p>
+        <dl class="education-facts">
+          <div class="education-degree"><dt>Degree</dt><dd>BEng (Hons) Electrical and Electronic Engineering</dd></div>
+          <div><dt>Study period</dt><dd>September 2023 – June 2027</dd></div>
+          <div><dt>Current status</dt><dd><span class="education-status"><span aria-hidden="true"></span>In Progress</span></dd></div>
+        </dl>
+      </section>
+
+      <div class="education-detail-grid">
+        <section class="education-card" aria-labelledby="education-timeline-heading">
+          <h4 id="education-timeline-heading"><span aria-hidden="true">02 /</span> Academic Timeline</h4>
+          <ol class="education-timeline">
+            <li><time datetime="2023-09">September 2023</time><p>Undergraduate studies commenced.</p></li>
+            <li class="education-expected"><time datetime="2027-06">June 2027</time><p>Expected completion.</p></li>
+          </ol>
+        </section>
+        <section class="education-card" aria-labelledby="education-interests-heading">
+          <h4 id="education-interests-heading"><span aria-hidden="true">03 /</span> Academic Interests</h4>
+          <ul class="education-interests">
+            <li>Artificial Intelligence</li>
+            <li>Computer Vision</li>
+            <li>Embedded Systems</li>
+            <li>Robotics and Control</li>
+            <li>Signal Processing</li>
+            <li>Internet of Things (IoT)</li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="education-card education-overview" aria-labelledby="education-overview-heading">
+        <h4 id="education-overview-heading"><span aria-hidden="true">04 /</span> Academic Overview</h4>
+        <p>My undergraduate background is in Electrical and Electronic Engineering at UNNC. My academic interests connect intelligent technologies with embedded systems, robotics and control, signal processing and the Internet of Things.</p>
+      </section>
+    </article>
+  </template>
+  <template id="contact-content">
+    <article class="contact-hub" aria-labelledby="contact-heading">
+      <p class="section-label">ENGINEERING COMMUNICATION HUB</p>
+      <div class="contact-hub-grid">
+        <section class="contact-introduction" aria-labelledby="contact-heading">
+          <h3 id="contact-heading">Let's Connect<span>.</span></h3>
+          <p class="contact-lead">Good engineering starts with a conversation.</p>
+          <p>I welcome conversations about electrical engineering, AI, embedded systems and collaborative engineering projects.</p>
+          <div class="contact-information">
+            <p class="contact-technical-label">ACADEMIC AFFILIATION</p>
+            <p>University of Nottingham Ningbo China</p>
+            <p class="contact-location"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Ningbo, China</p>
+          </div>
+          <p class="contact-collaboration">Let's exchange ideas and explore practical engineering challenges together.</p>
+          <svg class="contact-hud" viewBox="0 0 280 48" aria-hidden="true"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="9"/><path d="M24 1v46M1 24h46m9 0h37l9-8 12 16 12-16 12 8h100m-8-5 5 5-5 5M250 16v16m8-12v8m8-16v24m8-17v10"/></svg>
+        </section>
+        <section class="contact-channels" aria-labelledby="contact-channels-heading">
+          <h4 id="contact-channels-heading">CONTACT CHANNELS</h4>
+          <section class="contact-channel-card" aria-labelledby="contact-email-heading">
+            <header class="contact-channel-header">
+              <span class="contact-channel-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg></span>
+              <h5 id="contact-email-heading">Email</h5>
+              <span class="contact-channel-number" aria-hidden="true">01</span>
+            </header>
+            <a class="contact-channel-link" href="mailto:jessicazhao390@gmail.com">jessicazhao390@gmail.com <span aria-hidden="true">↗</span></a>
+            <p class="contact-channel-description">For engineering conversations and collaboration enquiries.</p>
+            <button class="contact-copy-button" id="copy-email" type="button" aria-label="Copy email address">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></svg><span class="copy-email-label">Copy Email</span>
+            </button>
+            <p class="contact-copy-status" id="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
+          </section>
+          <section class="contact-channel-card" aria-labelledby="contact-github-heading">
+            <header class="contact-channel-header">
+              <span class="contact-channel-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-1-2.7c3.3-.4 6.7-1.6 6.7-7.2A5.6 5.6 0 0 0 19.2 4a5.2 5.2 0 0 0-.1-4S17.8-.4 15 1.5a14.8 14.8 0 0 0-7 0C5.2-.4 3.9 0 3.9 0a5.2 5.2 0 0 0-.1 4A5.6 5.6 0 0 0 2.3 8.2c0 5.6 3.4 6.8 6.7 7.2a3.4 3.4 0 0 0-1 2.7V22" transform="translate(1 1) scale(.9)"/></svg></span>
+              <h5 id="contact-github-heading">GitHub</h5>
+              <span class="contact-channel-number" aria-hidden="true">02</span>
+            </header>
+            <a class="contact-channel-link" href="https://github.com/jessicazhao390-maker" target="_blank" rel="noopener noreferrer">github.com/jessicazhao390-maker <span aria-hidden="true">↗</span></a>
+            <p class="contact-channel-description">Explore my engineering projects and code repositories.</p>
+            <p class="contact-link-note">Opens in a new tab</p>
+          </section>
+        </section>
+      </div>
+    </article>
+  </template>
+</body>
+</html>
