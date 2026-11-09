@@ -163,6 +163,20 @@ function fillList(element, items) {
   }));
 }
 
+function renderProjectDirectory(windowBody) {
+  const directory = windowBody.querySelector('.project-directory');
+  directory.querySelector('.section-label').textContent = `PROJECT DIRECTORY / ${String(projects.length).padStart(2, '0')}`;
+  const buttons = projects.map((project, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.project = String(index);
+    button.setAttribute('aria-controls', 'project-detail');
+    button.textContent = project.title;
+    return button;
+  });
+  directory.append(...buttons);
+}
+
 function selectProject(button) {
   const windowBody = button.closest('.window-body');
   const project = projects[Number(button.dataset.project)];
@@ -630,7 +644,10 @@ function openApp(launcher) {
   windowOrder.push(app);
   windowLayer.append(element);
   taskbarApps.append(taskButton);
-  if (app === 'projects') selectProject(body.querySelector('[data-project]'));
+  if (app === 'projects') {
+    renderProjectDirectory(body);
+    selectProject(body.querySelector('[data-project]'));
+  }
   if (app === 'skills') renderSkills(body);
   attachWindowEvents(state);
   focusWindow(app);
