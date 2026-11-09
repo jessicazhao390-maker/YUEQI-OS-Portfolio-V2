@@ -163,6 +163,20 @@ function fillList(element, items) {
   }));
 }
 
+function renderProjectDirectory(windowBody) {
+  const directory = windowBody.querySelector('.project-directory');
+  directory.querySelector('.section-label').textContent = `PROJECT DIRECTORY / ${String(projects.length).padStart(2, '0')}`;
+  const buttons = projects.map((project, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.project = String(index);
+    button.setAttribute('aria-controls', 'project-detail');
+    button.textContent = project.title;
+    return button;
+  });
+  directory.append(...buttons);
+}
+
 function selectProject(button) {
   const windowBody = button.closest('.window-body');
   const project = projects[Number(button.dataset.project)];
@@ -182,7 +196,25 @@ function selectProject(button) {
     windowBody.querySelector(selector).textContent = value;
   });
   const image = windowBody.querySelector('#project-image');
+  const imageFallback = windowBody.querySelector('#project-image-fallback');
+  if (!image.dataset.fallbackHandling) {
+    image.addEventListener('load', () => {
+      if (image.getAttribute('src') !== image.dataset.expectedSrc) return;
+      image.hidden = false;
+      imageFallback.hidden = true;
+    });
+    image.addEventListener('error', () => {
+      if (image.getAttribute('src') !== image.dataset.expectedSrc) return;
+      image.hidden = true;
+      imageFallback.textContent = `The concept image for ${image.alt.replace(' — concept illustration', '')} could not be loaded.`;
+      imageFallback.hidden = false;
+    });
+    image.dataset.fallbackHandling = 'true';
+  }
   image.alt = `${project.title} — concept illustration`;
+  imageFallback.hidden = true;
+  image.hidden = false;
+  image.dataset.expectedSrc = project.image;
   image.src = project.image;
   windowBody.querySelector('#project-period').hidden = !project.period;
   fillList(windowBody.querySelector('#project-contributions'), project.contributions);
@@ -612,7 +644,10 @@ function openApp(launcher) {
   windowOrder.push(app);
   windowLayer.append(element);
   taskbarApps.append(taskButton);
-  if (app === 'projects') selectProject(body.querySelector('[data-project]'));
+  if (app === 'projects') {
+    renderProjectDirectory(body);
+    selectProject(body.querySelector('[data-project]'));
+  }
   if (app === 'skills') renderSkills(body);
   attachWindowEvents(state);
   focusWindow(app);

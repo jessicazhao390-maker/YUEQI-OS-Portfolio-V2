@@ -935,6 +935,7 @@ h3 {
 .project-visual { margin: 0 0 25px; }
 /* Keep concept artwork in a responsive 16:9 frame without stretching. */
 .project-image-frame {
+  position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   margin-bottom: 8px;
@@ -948,6 +949,18 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.project-image-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 24px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
 }
 .project-image-frame:hover { border-color: #38d9f580; }
 .project-visual figcaption { color: var(--muted); font: 8px/1.7 monospace; letter-spacing: .6px; }
