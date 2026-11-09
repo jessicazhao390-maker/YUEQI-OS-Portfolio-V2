@@ -182,7 +182,25 @@ function selectProject(button) {
     windowBody.querySelector(selector).textContent = value;
   });
   const image = windowBody.querySelector('#project-image');
+  const imageFallback = windowBody.querySelector('#project-image-fallback');
+  if (!image.dataset.fallbackHandling) {
+    image.addEventListener('load', () => {
+      if (image.getAttribute('src') !== image.dataset.expectedSrc) return;
+      image.hidden = false;
+      imageFallback.hidden = true;
+    });
+    image.addEventListener('error', () => {
+      if (image.getAttribute('src') !== image.dataset.expectedSrc) return;
+      image.hidden = true;
+      imageFallback.textContent = `The concept image for ${image.alt.replace(' — concept illustration', '')} could not be loaded.`;
+      imageFallback.hidden = false;
+    });
+    image.dataset.fallbackHandling = 'true';
+  }
   image.alt = `${project.title} — concept illustration`;
+  imageFallback.hidden = true;
+  image.hidden = false;
+  image.dataset.expectedSrc = project.image;
   image.src = project.image;
   windowBody.querySelector('#project-period').hidden = !project.period;
   fillList(windowBody.querySelector('#project-contributions'), project.contributions);
